@@ -49,6 +49,15 @@ contract ERC20 {
     return true;
   }
 
+  function deposit(address spender) external payable returns (bool) {
+    require(spender != address(0), "ERC20: deposit to the zero address");
+    require(msg.value > 0, "ERC20: deposit is zero");
+
+    _mint(spender, msg.value);
+
+    return true;
+  }
+
   function _transfer(address sender, address recipient, uint256 amount) private returns (bool) {
     require(recipient != address(0), "ERC20: transfer to the zero address");
 
